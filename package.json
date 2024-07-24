@@ -1,0 +1,31 @@
+{
+    "name": "wxha",
+    "version": "1.0.0",
+    "main": "src/index.js",
+    "types": "src/index.d.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ramazaneris/exha.git"
+    },
+    "keywords": [
+        "express",
+        "handler",
+        "middleware",
+        "router",
+        "typescript",
+        "config",
+        "exhaustive",
+        "exha"
+    ],
+    "author": "Ramco",
+    "license": "MIT",
+    "description": "Fast, compact, open source route and middleware handler for expess",
+    "dependencies": {
+        "clcn": "^2.0.1",
+        "cors": "^2.8.5",
+        "express": "^4.19.2"
+    }
+}
