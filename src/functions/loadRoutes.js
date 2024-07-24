@@ -12,12 +12,11 @@ let loadRoutes = (app, config) => {
         } else {
             const route = require(fullPath);
             route.middlewares = route.middlewares || [];
+
+            let frSplit = fullRoute.split("/").slice(2, -1);
             let endpoint = (
-                "/" +
-                fullRoute.split("/").slice(2, -1).join("/") +
-                (file === "index.js" || file === "index.ts"
-                    ? ""
-                    : "" + file.split(".")[0])
+                (frSplit.length === 0 ? "/" : "/" + frSplit.join("/") + "/") +
+                (file.split(".")[0] === "index" ? "" : file.split(".")[0])
             ).replace(/\[([^\]]+)\]/g, ":$1");
 
             let [routeFile, method] = file.split(".");

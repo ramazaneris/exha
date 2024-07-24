@@ -162,6 +162,8 @@ project_root/
 .
 ```
 
+-   routes/messages/[message_id]/index.js
+
 ```js
 //commonjs
 module.exports = {
