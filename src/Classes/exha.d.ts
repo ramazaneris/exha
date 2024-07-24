@@ -1,5 +1,5 @@
 declare class Exha {
-    constructor();
+    constructor(app: any);
     public getExha(): string;
 }
 

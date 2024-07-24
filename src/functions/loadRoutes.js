@@ -15,7 +15,11 @@ let loadRoutes = (app, config) => {
             let endpoint = (
                 "/" +
                 fullRoute.split("/").slice(2, -1).join("/") +
-                (file === "index.js" ? "" : "/" + file.split(".")[0])
+                (file === "index.js"
+                    ? ""
+                    : file === "index.ts"
+                    ? ""
+                    : "/" + file.split(".")[0])
             ).replace(/\[([^\]]+)\]/g, ":$1");
 
             let [routeFile, method] = file.split(".");
