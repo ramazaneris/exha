@@ -15,10 +15,13 @@ let loadConfig = () => {
 
     let config;
 
+    let stableConfig;
     if (configPath.split(".").pop() === "ts") {
         config = require(resolve(configPath)).config;
+        stableConfig = require(resolve(configPath)).config;
     } else if (configPath.split(".").pop() === "js") {
         config = require(resolve(configPath));
+        stableConfig = require(resolve(configPath));
     } else {
         throw new Error(
             "Config file not foun create this file in root directory as exha.config.js or exha.config.ts"
@@ -66,16 +69,18 @@ let loadConfig = () => {
         }
     }
 
-    if (configPath.split(".").pop() === "ts") {
-        fs.writeFileSync(
-            configPath,
-            `export const config = ${JSON.stringify(config, null, 4)}`
-        );
-    } else {
-        fs.writeFileSync(
-            configPath,
-            `module.exports = ${JSON.stringify(config, null, 4)}`
-        );
+    if (config !== stableConfig) {
+        if (configPath.split(".").pop() === "ts") {
+            fs.writeFileSync(
+                configPath,
+                `export const config = ${JSON.stringify(config, null, 4)}`
+            );
+        } else {
+            fs.writeFileSync(
+                configPath,
+                `module.exports = ${JSON.stringify(config, null, 4)}`
+            );
+        }
     }
 
     return config;
