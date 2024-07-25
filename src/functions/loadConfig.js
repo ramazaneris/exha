@@ -35,6 +35,11 @@ let loadConfig = () => {
     if (!config.middlewareDir) {
         config.middlewareDir = "./middlewares";
     }
+
+    if (!config.pluginDir) {
+        config.pluginDir = "./plugins";
+    }
+
     if (!fs.existsSync(config.middlewareDir)) {
         fs.mkdirSync(config.middlewareDir, { recursive: true });
     }
@@ -70,6 +75,7 @@ let loadConfig = () => {
     }
 
     if (config !== stableConfig) {
+        console.log("Config file updating...");
         if (configPath.split(".").pop() === "ts") {
             fs.writeFileSync(
                 configPath,

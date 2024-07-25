@@ -1,3 +1,3 @@
-declare function loadMiddleware(path: string): { middleware: function };
+declare function loadMiddleware(path: string): Function;
 
 export { loadMiddleware };
