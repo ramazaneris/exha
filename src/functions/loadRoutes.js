@@ -1,6 +1,11 @@
 const fs = require("fs");
 const path = require("path");
 const clcn = require("clcn");
+const { bgRed } = require("clcn");
+const { bgBlue } = require("clcn");
+const { bgGreen } = require("clcn");
+const { bgYellow } = require("clcn");
+const { bgWhite } = require("clcn");
 
 let loadRoutes = (app, config) => {
     fs.readdirSync(path.resolve(config.routeDir)).map((file) => {
@@ -23,23 +28,25 @@ let loadRoutes = (app, config) => {
             switch (method) {
                 case "post":
                     app.post(endpoint, ...route?.middlewares, route.event);
-                    console.log("POST Route " + endpoint + " loaded");
+                    console.log(bgBlue("POST Route " + endpoint + " loaded"));
                     break;
                 case "put":
                     app.put(endpoint, ...route?.middlewares, route.event);
-                    console.log("PUT Route " + endpoint + " loaded");
+                    console.log(bgWhite("PUT Route " + endpoint + " loaded"));
                     break;
                 case "delete":
                     app.delete(endpoint, ...route?.middlewares, route.event);
-                    console.log("DELETE Route " + endpoint + " loaded");
+                    console.log(bgRed("DELETE Route " + endpoint + " loaded"));
                     break;
                 case "patch":
                     app.patch(endpoint, ...route?.middlewares, route.event);
-                    console.log("PATCH Route " + endpoint + " loaded");
+                    console.log(
+                        bgYellow("PATCH Route " + endpoint + " loaded")
+                    );
                     break;
                 default:
                     app.get(endpoint, ...route?.middlewares, route.event);
-                    console.log("GET Route " + endpoint + " loaded");
+                    console.log(bgGreen("GET Route " + endpoint + " loaded"));
                     method = "get";
                     break;
             }

@@ -1,17 +1,20 @@
 const { loadRoutes } = require("./loadRoutes");
-const { loadConfig } = require("./loadConfig");
 const express = require("express");
 
-let init = (app) => {
-    let config = loadConfig();
+let init = (app, config) => {
+    if (config.parseForm) {
+        app.use(express.json());
+        app.use(express.urlencoded({ extended: true }));
+    }
+    if (config.staticDir) {
+        app.use(config.staticDir, express.static(config.staticDir));
+    }
 
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: true }));
-    app.use(config.staticDir, express.static(config.staticDir));
-    
     loadRoutes(app, config);
-    app.listen(config.port, () => {
-        console.log(`Example app listening at http://localhost:${config.port}`);
+    app.listen(config.port || 3000, () => {
+        console.log(
+            `Exha app listening at http://localhost:${config.port || 3000}`
+        );
     });
 };
 

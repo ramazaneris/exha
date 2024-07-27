@@ -6,6 +6,13 @@ Fast, compact, open source route and middleware handler for [expess](https://www
 [![NPM Install Size][npm-install-size-image]][npm-install-size-url]
 [![NPM Downloads][npm-downloads-image]][npm-downloads-url]
 
+
+Beta features
+```lua
+npx exha project_path_here
+```
+
+
 ```js
 //index.js
 const express = require("express");

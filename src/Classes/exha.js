@@ -1,4 +1,4 @@
-const { loadConfig } = require("../functions/loadConfig");
+const { loadConfig } = require("../functions/config/load");
 const { init } = require("../functions/init");
 
 class Exha {
@@ -9,7 +9,7 @@ class Exha {
     }
 
     getExha() {
-        init(this.app);
+        init(this.app, this.config);
     }
 }
 
