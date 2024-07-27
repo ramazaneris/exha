@@ -8,8 +8,7 @@ let createProject = (answers, targetDir) => {
     }
 
     if (answers.imageUploader) {
-        console.log(answers.imageUploader);
-        console.log("Images uploadings...");
+        console.log("Images uploader creating...");
     }
 
     if (answers.staticDir) {
@@ -22,11 +21,13 @@ let createProject = (answers, targetDir) => {
         console.log("Assets folder created : ", staticDir);
     }
 
-    console.log(answers);
     try {
+        execSync("cd " + targetDir, { stdio: "ignore" });
         execSync("pnpm install express", { stdio: "ignore" });
         if (answers.typescript) {
-            execSync("pnpm install @types/express", { stdio: "ignore" });
+            execSync("pnpm install @types/express exha@beta", {
+                stdio: "ignore",
+            });
         }
         console.log("Project created:", targetDir);
     } catch (error) {
