@@ -2,14 +2,9 @@
 
 Fast, compact, open source route and middleware handler for [expess](https://www.npmjs.com/package/express)
 
-[![NPM Version][npm-version-image]][npm-url]
-[![NPM Install Size][npm-install-size-image]][npm-install-size-url]
-[![NPM Downloads][npm-downloads-image]][npm-downloads-url]
-
-
 Beta features
 ```lua
-npx exha project_path_here
+npx exha@beta
 ```
 
 
