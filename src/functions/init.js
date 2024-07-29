@@ -1,5 +1,6 @@
-const { loadRoutes } = require("./loadRoutes");
+const { loadRoutes } = require("./loads/routes");
 const express = require("express");
+const clcn = require("clcn");
 
 let init = (app, config) => {
     if (config.parseForm) {
@@ -13,7 +14,9 @@ let init = (app, config) => {
     loadRoutes(app, config);
     app.listen(config.port || 3000, () => {
         console.log(
-            `Exha app listening at http://localhost:${config.port || 3000}`
+            clcn.txtMagenta(
+                `Exha app listening at http://localhost:${config.port || 3000}`
+            )
         );
     });
 };

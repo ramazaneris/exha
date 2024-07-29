@@ -8,7 +8,7 @@ let getConfig = () => {
         ? require(resolve("./exha.config.js")).default
         : {
               routeDir: "./routes",
-              port: 3000,
+              port: 3001,
           };
 
     return config;

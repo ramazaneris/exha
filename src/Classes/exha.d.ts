@@ -1,6 +1,6 @@
 declare class Exha {
-    constructor(app: any);
-    public getExha(): string;
+    constructor(app?: any);
+    public init(): void;
 }
 
 export { Exha };

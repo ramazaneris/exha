@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { resolve } = require("path");
-const { getConfig } = require("./config/get");
+const { getConfig } = require("../config/get");
 let loadMiddleware = (path) => {
     let middlewareDir = getConfig().middlewareDir;
     if (middlewareDir === undefined) {

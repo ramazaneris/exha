@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { resolve } = require("path");
-const { getConfig } = require("./config/get");
+const { getConfig } = require("../config/get");
 
 let loadPlugin = (path) => {
     let pluginDir = getConfig().pluginDir;

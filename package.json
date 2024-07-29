@@ -1,9 +1,8 @@
 {
     "name": "exha",
-    "version": "1.1.11",
+    "version": "1.0.6",
     "main": "src/index.js",
     "types": "src/index.d.ts",
-    "bin": "src/bin/exha.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -26,11 +25,8 @@
     "description": "Fast, compact, open source route and middleware handler for expess",
     "dependencies": {
         "@types/express": "^4.17.21",
-        "child_process": "^1.0.2",
         "clcn": "^2.0.1",
         "cors": "^2.8.5",
-        "express": "^4.19.2",
-        "fs-extra": "^11.2.0",
-        "inquirer": "^10.1.2"
+        "express": "^4.19.2"
     }
 }
