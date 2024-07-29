@@ -1,5 +1,8 @@
+import { Application } from "express";
+
 declare class Exha {
-    constructor(app?: any);
+    public app: Application;
+    constructor(app?: Application);
     public init(): void;
 }
 
