@@ -2,22 +2,18 @@
 
 Fast, compact, open source route and middleware handler for [expess](https://www.npmjs.com/package/express)
 
-Beta features
-```lua
-npx exha@beta
-```
+Fast Setup
 
+```lua
+npx exhapack your_app_name
+```
 
 ```js
 //index.js
-const express = require("express");
 const { Exha } = require("exha");
+const exha = new Exha();
 
-const app = express();
-
-const exha = new Exha(app);
-
-exha.getExha();
+exha.init();
 ```
 
 ## Installation
@@ -128,7 +124,7 @@ CommonJS
 
 ```js
 //./exha.config.js
-module.exports = {
+exports.default = {
     port: 3001,
     routeDir: "./routes",
     middlewareDir: "./middlewares",
@@ -139,7 +135,7 @@ module.exports = {
 ESModule
 
 ```js
-export const config = {
+export default {
     port: 3001,
     routeDir: "./routes",
     middlewareDir: "./middlewares",
