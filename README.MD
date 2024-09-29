@@ -31,144 +31,206 @@ $ npm install --save-dev exha
 -   Easily file routings
 -   Easily file middlewares for routings
 -   Create application quickly
+-   Built-in image uploader
 
-## Quick Start
+## Table of Contents
 
-Create roots
+-   [Setup](#setup)
+-   [Middleware uses](#middleware-uses)
+-   [Plugin uses](#plugin-uses)
+-   [Form parsing](#form-parsing)
+-   [Static files](#static-files)
+-   [Image uploader](#image-uploader)
+
+### Setup
+
+Create a `/root` directory, create `index.js` file, create `exha.config.js` file, create `/routes` directory and create `/index` file in routes directory
+
+Looks like;
 
 ```lua
 project_root/
 │
-├── routes/
-│   └── index.js //its router to GET - /
-│   └── test/
-│       └── message.post.js // its route to POST - /test/message
-├── middlewares/
-│   └── isMessage.js
+├── /routes
+│   └── index.js
+│
 ├── exha.config.js
-├── index.js
-├── package.json
-.
-.
-.
+│
+└── index.js
 ```
 
--   routes/indexjs
+project_root/index.js
 
 ```js
-//commonjs
+const { Exha } = require("exha");
+let exha = new Exha();
+
+exha.init();
+```
+
+project_root/exha.config.js
+
+```js
+exports.default = {
+    port: 3000,
+    routeDir: "/routes",
+};
+```
+
+project_root/routes/index.js
+
+```js
 module.exports = {
     event: (req, res) => {
-        res.send("Hello, you are in the /");
+        res.send("Hello world");
     },
-};
-
-//esmodule
-export const event = (req, res) => {
-    res.send("Hello, you are in the /");
 };
 ```
 
--   routes/test/message.post.js
+### Middleware uses
+
+Add `middlewareDir` properties to exha config
 
 ```js
-//commonjs
-const { mwLoader } = require("exha");
-const isMessage = mwLoader("/isMessage.js");
-module.exports = {
-    middlewares: [isMessage],
-    event: (req, res) => {
-        //Save message to your database
-        res.send("We got your message");
-    },
+exports.default = {
+    port: 3000,
+    routeDir: "/routes",
+    middlewareDir: "/middlewares",
 };
-
-//esmodule
-import { mwLoader } from "exha";
-const isMessage = mwLoader("/isMessage.js");
-
-const middlewares = [isMessage];
-const event = (req, res) => {
-    //Save message to your database
-    res.send("We got your message");
-};
-
-export { middlewares, event };
 ```
 
--   middlewares/isMessage.js
+and create a new middleware in `/middlewares` directory
+
+project_root/middlewares/check.js
 
 ```js
-//commonjs
 module.exports = {
     middleware: (req, res, next) => {
-        if (req.body.message) {
-            next();
-        } else {
-            res.send("Don't you have any message?");
-        }
-    },
-};
-
-//esmodule
-export const middleware = (req, res, next) => {
-    if (req.body.message) {
+        console.log("A new request!");
         next();
-    } else {
-        res.send("Don't you have any message?");
-    }
-};
-```
-
-CommonJS
-
-```js
-//./exha.config.js
-exports.default = {
-    port: 3001,
-    routeDir: "./routes",
-    middlewareDir: "./middlewares",
-    staticDir: "./public",
-};
-```
-
-ESModule
-
-```js
-export default {
-    port: 3001,
-    routeDir: "./routes",
-    middlewareDir: "./middlewares",
-    staticDir: "./public",
-};
-```
-
-## Work with params
-
-```lua
-project_root/
-│
-├── routes/
-.
-.
-.
-│   └── messages/
-│       └── [message_id]/
-│           └── index.js
-.
-.
-.
-```
-
--   routes/messages/[message_id]/index.js
-
-```js
-//commonjs
-module.exports = {
-    event: (req, res) => {
-        let message_id = req.params.message_id;
-        //Search in your database
-        res.send("Here your message" /*Write database result*/);
     },
 };
+```
+
+and go back to routes/index
+
+```js
+const {mwLoader} = require("exha")
+let checkMw = mwLoader("check.js")
+
+module.exports = {
+    middlewares = [checkMw],
+    event: (req,res) => {
+        res.send("Hello world")
+    }
+}
+```
+
+### Plugin uses
+
+Plugin usage is very similar to middleware. Add `pluginDir` properties to exha config
+
+```js
+exports.default = {
+    port: 3000,
+    routeDir: "/routes",
+    middlewareDir: "/middlewares",
+    pluginDir: "/plugins",
+};
+```
+
+and create a new plugin in `/plugins` directory
+
+project_root/plugins/whoReq.js
+
+```js
+module.exports = {
+    plugin: (name) => {
+        console.log(name, " requested");
+    },
+};
+```
+
+and go back to routes/index
+
+```js
+const {mwLoader,plLoader} = require("exha")
+let checkMw = mwLoader("check.js")
+let whoReq = plLoader("whoReq.js")
+
+module.exports = {
+    middlewares = [checkMw],
+    event: (req,res) => {
+        whoReq("John Doe")
+        res.send("Hello world")
+    }
+}
+```
+
+### Form parsing
+
+Allows parsing of incoming requests
+
+Add `parseForm` properties to exha config
+
+```js
+exports.default = {
+    port: 3000,
+    routeDir: "/routes",
+    middlewareDir: "/middlewares",
+    pluginDir: "/plugins",
+    parseForm: true,
+};
+```
+
+### Static files
+
+Serving static files
+
+Add `staticDir` properties to exha config
+
+```js
+exports.default = {
+    port: 3000,
+    routeDir: "/routes",
+    middlewareDir: "/middlewares",
+    pluginDir: "/plugins",
+    parseForm: true,
+    staticDir: "public",
+};
+```
+
+### Image uploader
+
+Built-in image uploader
+
+Add `imageUploader` properties to exha config
+
+```js
+exports.default = {
+    port: 3000,
+    routeDir: "/routes",
+    middlewareDir: "/middlewares",
+    pluginDir: "/plugins",
+    parseForm: true,
+    staticDir: "public",
+    imageUploader: true,
+};
+```
+
+Use can it in middleware
+
+```js
+const {mwLoader,plLoader,uploader} = require("exha")
+let checkMw = mwLoader("check.js")
+let whoReq = plLoader("whoReq.js")
+
+module.exports = {
+    middlewares = [checkMw,uploader.single("image")],
+    event: (req,res) => {
+        console.log(req.files)
+        whoReq("John Doe")
+        res.send("Hello world")
+    }
+}
 ```
