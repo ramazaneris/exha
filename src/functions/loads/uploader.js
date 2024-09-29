@@ -42,4 +42,4 @@ if (getConfig().imageUploader) {
 
 let uploader = multer({ storage: storage });
 
-export { uploader };
+module.exports = { uploader };
