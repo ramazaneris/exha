@@ -5,7 +5,7 @@ const { bgRed, bgBlue, bgGreen, bgYellow, bgWhite, txtBlack } = require("clcn");
 // Load routes from the route directory
 let loadRoutes = (app, config) => {
     // Normalize the route directory
-    let normalizedRouteDir = config.routeDir.replace(/^(\.\/|\/)?/, "");
+    let normalizedRouteDir = "./" + config.routeDir.replace(/^(\.\/|\/)?/, "");
 
     // Read the route directory
     fs.readdirSync(path.resolve(normalizedRouteDir)).map((file) => {
