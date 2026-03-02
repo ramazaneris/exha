@@ -35,12 +35,16 @@ $ npm install --save-dev exha
 
 ## Table of Contents
 
--   [Setup](#setup)
--   [Middleware uses](#middleware-uses)
--   [Plugin uses](#plugin-uses)
--   [Form parsing](#form-parsing)
--   [Static files](#static-files)
--   [Image uploader](#image-uploader)
+- [Installation](#installation)
+- [Features](#features)
+- [Table of Contents](#table-of-contents)
+  - [Setup](#setup)
+  - [Middleware uses](#middleware-uses)
+  - [Plugin uses](#plugin-uses)
+  - [Form parsing](#form-parsing)
+  - [Static files](#static-files)
+  - [Image uploader](#image-uploader)
+  - [Change source directory](#change-source-directory)
 
 ### Setup
 
@@ -215,6 +219,23 @@ exports.default = {
     parseForm: true,
     staticDir: "public",
     imageUploader: true,
+};
+```
+
+### Change source directory
+
+Change the project source directory
+
+```js
+exports.default = {
+    port: 3000,
+    routeDir: "/routes",
+    middlewareDir: "/middlewares",
+    pluginDir: "/plugins",
+    parseForm: true,
+    staticDir: "public",
+    imageUploader: true,
+    sourceDir:"src/"
 };
 ```
 
